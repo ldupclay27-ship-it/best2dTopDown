@@ -1,5 +1,5 @@
 extends Area2D
-@export var next_scene : PackedScene 
+@export var next_scene : String
 @export var player_location : Vector2
 
 # Called when the node enters the scene tree for the first time.
@@ -12,12 +12,11 @@ func _process(delta: float) -> void:
 	pass
 
 
-
-
 func _on_body_entered(body: Node2D) -> void:
 	
 	if body is Player:
 		print("entered the portal")
+		SceneManager.player_spawn_position = player_location
 		get_tree().change_scene_to_file.call_deferred(next_scene)
 	
 
