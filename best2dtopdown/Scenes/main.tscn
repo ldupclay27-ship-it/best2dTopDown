@@ -1,14 +1,15 @@
-[gd_scene load_steps=15 format=4 uid="uid://w84yaseyus5a"]
+[gd_scene load_steps=16 format=4 uid="uid://w84yaseyus5a"]
 
-[ext_resource type="Texture2D" uid="uid://b6jm8laltqdux" path="res://Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetFloor.png" id="1_288ee"]
-[ext_resource type="PackedScene" uid="uid://cohhxm4l67hth" path="res://player.tscn" id="1_qgayv"]
-[ext_resource type="Texture2D" uid="uid://b86kfhb83h7og" path="res://Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetHouse.png" id="2_0xq8o"]
-[ext_resource type="Texture2D" uid="uid://c10mu3ogmo6m7" path="res://Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetNature.png" id="2_71fp2"]
-[ext_resource type="Texture2D" uid="uid://cp77d844m3uep" path="res://Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetWater.png" id="2_gyetk"]
-[ext_resource type="PackedScene" uid="uid://bmdynjgrjuy2g" path="res://portal.tscn" id="6_hnhqx"]
+[ext_resource type="Texture2D" uid="uid://b6jm8laltqdux" path="res://Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetFloor.png" id="1_ye2k2"]
+[ext_resource type="Texture2D" uid="uid://cp77d844m3uep" path="res://Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetWater.png" id="2_eafcu"]
+[ext_resource type="Texture2D" uid="uid://b86kfhb83h7og" path="res://Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetHouse.png" id="3_esgre"]
+[ext_resource type="Texture2D" uid="uid://c10mu3ogmo6m7" path="res://Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetNature.png" id="4_lohrc"]
+[ext_resource type="PackedScene" uid="uid://cohhxm4l67hth" path="res://Scenes/player.tscn" id="5_0btrc"]
+[ext_resource type="PackedScene" uid="uid://dx02d62eaiykr" path="res://Blocks/block.tscn" id="5_jd6vi"]
+[ext_resource type="PackedScene" uid="uid://bmdynjgrjuy2g" path="res://Scenes/portal.tscn" id="6_5xr4x"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mwtg0"]
-texture = ExtResource("1_288ee")
+texture = ExtResource("1_ye2k2")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -776,7 +777,7 @@ terrain_set_0/terrain_0/color = Color(0.665074, 4.51466e-05, 0.522302, 1)
 sources/0 = SubResource("TileSetAtlasSource_mwtg0")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fx5ao"]
-texture = ExtResource("2_gyetk")
+texture = ExtResource("2_eafcu")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -1041,7 +1042,7 @@ texture = ExtResource("2_gyetk")
 sources/0 = SubResource("TileSetAtlasSource_fx5ao")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sl0s8"]
-texture = ExtResource("2_0xq8o")
+texture = ExtResource("3_esgre")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -1660,7 +1661,7 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_sl0s8")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_loj8o"]
-texture = ExtResource("2_71fp2")
+texture = ExtResource("4_lohrc")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -2067,7 +2068,10 @@ position = Vector2(-20, -68)
 tile_map_data = PackedByteArray("AAAOABEAAAAMAAIAAAA7ABAAAAAMAAIAAAAgAAUAAAAMAAIAAAAIABQAAAAOAAAAAAA5ABQAAAAOAAAAAAArACIAAAANAAgAAAAHAAsAAAANAAgAAABAAAIAAAANAAgAAAABAAkAAAAEAAgAAAAWAAYAAAAEAAgAAAAEACEAAAACAAgAAAArABQAAAACAAgAAAApAA0AAAAJAAgAAAAqAA0AAAAJAAgAAAAqAA4AAAAJAAkAAAAJACQAAAAAAAsAAAADABAAAAAAAAsAAAAyAAgAAAAAAAsAAABBAB0AAAAAAAsAAAAeAAoAAAADAAsAAAAhACAAAAADAAsAAAAZABgAAAAAABIAAAA1ACUAAAAAABIAAAAOAAQAAAAAABIAAAD//yQAAAAAABIAAAAFAAwAAAAPABIAAABCAAQAAAAPABIAAAA=")
 tile_set = SubResource("TileSet_xlx6p")
 
-[node name="player" parent="." instance=ExtResource("1_qgayv")]
+[node name="Block" parent="." instance=ExtResource("5_jd6vi")]
+position = Vector2(197, 528)
+
+[node name="player" parent="." instance=ExtResource("5_0btrc")]
 y_sort_enabled = true
 position = Vector2(486, 271)
 
@@ -2075,7 +2079,7 @@ position = Vector2(486, 271)
 position = Vector2(0, 1)
 zoom = Vector2(3.5, 3.5)
 
-[node name="Portal" parent="." instance=ExtResource("6_hnhqx")]
+[node name="Portal" parent="." instance=ExtResource("6_5xr4x")]
 position = Vector2(198, 528)
 next_scene = "res://house.tscn"
 player_location = Vector2(1, 89)

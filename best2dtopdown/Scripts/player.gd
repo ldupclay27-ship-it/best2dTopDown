@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name Player
 
 @export var move_speed: float = 100.0
-
+@export var push_strength: float = 140.0
 
 func _ready() -> void :
 	position = SceneManager.player_spawn_position
@@ -21,4 +21,16 @@ func _physics_process(delta: float) -> void:
 		$AnimatedSprite2D.play("walk_up")
 	else:
 		$AnimatedSprite2D.stop()
+	
+	var collision: KinematicCollision2D = get_last_slide_collision()
+	if collision: 
+		#get colliding node
+		var collider_node = collision.get_collider()
+		if collider_node.is_in_group("movable"):
+			# get direction of collision
+			# make it negative
+			var collision_normal: Vector2 = collision.get_normal()
+			collider_node.apply_central_force(-collision_normal * push_strength)
+	
 	move_and_slide()
+	

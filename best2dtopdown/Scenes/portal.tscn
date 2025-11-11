@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bmdynjgrjuy2g"]
 
-[ext_resource type="Script" path="res://portal.gd" id="1_y888b"]
+[ext_resource type="Script" path="res://Scripts/portal.gd" id="1_y888b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0umd8"]
 
