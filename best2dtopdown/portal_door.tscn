@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://d17ufew3xks65"]
+
+[ext_resource type="Texture2D" uid="uid://bpe703ct8m53w" path="res://Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetReliefDetail.png" id="1_gwa3x"]
+[ext_resource type="Script" path="res://portal_door.gd" id="1_xksxr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_obc28"]
+size = Vector2(16, 16)
+
+[node name="PortalDoor" type="StaticBody2D"]
+script = ExtResource("1_xksxr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_obc28")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_gwa3x")
+region_enabled = true
+region_rect = Rect2(31.5297, 47.853, 16.4211, 16.2233)

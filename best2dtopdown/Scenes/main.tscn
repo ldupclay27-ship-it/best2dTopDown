@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://w84yaseyus5a"]
+[gd_scene load_steps=22 format=4 uid="uid://w84yaseyus5a"]
 
 [ext_resource type="Texture2D" uid="uid://b6jm8laltqdux" path="res://Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetFloor.png" id="1_ye2k2"]
 [ext_resource type="Texture2D" uid="uid://cp77d844m3uep" path="res://Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetWater.png" id="2_eafcu"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://cohhxm4l67hth" path="res://Scenes/player.tscn" id="5_0btrc"]
 [ext_resource type="PackedScene" uid="uid://dx02d62eaiykr" path="res://Blocks/block.tscn" id="5_jd6vi"]
 [ext_resource type="PackedScene" uid="uid://bmdynjgrjuy2g" path="res://Scenes/portal.tscn" id="6_5xr4x"]
+[ext_resource type="PackedScene" uid="uid://c0707hi0uc5s8" path="res://puzzle_button.tscn" id="8_eaxkc"]
+[ext_resource type="PackedScene" uid="uid://d17ufew3xks65" path="res://portal_door.tscn" id="9_4jncy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mwtg0"]
 texture = ExtResource("1_ye2k2")
@@ -1630,7 +1632,7 @@ texture = ExtResource("3_esgre")
 26:0/size_in_atlas = Vector2i(3, 3)
 26:0/0 = 0
 26:0/0/y_sort_origin = 12
-26:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -0.707108, 8, 0.353554, 21.2132, 14.4957, 22.2739, 22.6274, -23.6881, 23.3345)
+26:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-20.3125, -10.5, 21.9375, -9.375, 20.9375, 8.125, 21.0625, 21.375, 9.8125, 22.5, 10.8156, 3.78242, -10.4375, 3.5, -10.4375, 21.625, -21.4375, 22)
 19:19/size_in_atlas = Vector2i(3, 3)
 19:19/0 = 0
 19:19/0/y_sort_origin = 12
@@ -2037,6 +2039,18 @@ texture = ExtResource("4_lohrc")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_loj8o")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d4bjd"]
+size = Vector2(319, 17)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1gf61"]
+size = Vector2(314, 17)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1l48i"]
+size = Vector2(31, 222)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r20u5"]
+size = Vector2(31, 224.25)
+
 [node name="main" type="Node2D"]
 y_sort_enabled = true
 position = Vector2(38, 115)
@@ -2069,20 +2083,59 @@ tile_map_data = PackedByteArray("AAAOABEAAAAMAAIAAAA7ABAAAAAMAAIAAAAgAAUAAAAMAAI
 tile_set = SubResource("TileSet_xlx6p")
 
 [node name="Block" parent="." instance=ExtResource("5_jd6vi")]
-position = Vector2(197, 528)
+z_index = 1
+position = Vector2(141, 562)
+collision_layer = 4
+collision_mask = 10
 
 [node name="player" parent="." instance=ExtResource("5_0btrc")]
 y_sort_enabled = true
 position = Vector2(486, 271)
+collision_layer = 2
+collision_mask = 21
 
 [node name="Camera2D" type="Camera2D" parent="player"]
 position = Vector2(0, 1)
 zoom = Vector2(3.5, 3.5)
 
 [node name="Portal" parent="." instance=ExtResource("6_5xr4x")]
-position = Vector2(198, 528)
-next_scene = "res://house.tscn"
+position = Vector2(196, 512)
+collision_mask = 2
+next_scene = "res://Scenes/house.tscn"
 player_location = Vector2(1, 89)
 
 [node name="PlayerPortalSpawnLocation" type="Marker2D" parent="."]
 position = Vector2(180, 155)
+
+[node name="PuzzleButton" parent="." instance=ExtResource("8_eaxkc")]
+position = Vector2(197, 583)
+collision_layer = 4
+collision_mask = 6
+
+[node name="PortalDoor" parent="." instance=ExtResource("9_4jncy")]
+position = Vector2(196, 515)
+collision_mask = 2
+
+[node name="BlockStopper" type="StaticBody2D" parent="."]
+position = Vector2(163, 421)
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BlockStopper"]
+position = Vector2(2.5, 27)
+shape = SubResource("RectangleShape2D_d4bjd")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="BlockStopper"]
+position = Vector2(3, 230)
+shape = SubResource("RectangleShape2D_1gf61")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="BlockStopper"]
+position = Vector2(-169, 133)
+shape = SubResource("RectangleShape2D_1l48i")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="BlockStopper"]
+position = Vector2(164, 126.875)
+shape = SubResource("RectangleShape2D_r20u5")
+
+[connection signal="pressed" from="PuzzleButton" to="PortalDoor" method="_on_puzzle_button_pressed"]
+[connection signal="unpressed" from="PuzzleButton" to="PortalDoor" method="_on_puzzle_button_unpressed"]
