@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://mfmtysqn00hb" path="res://Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetElement.png" id="1_ij0yv"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4meto"]
-size = Vector2(20, 22)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lmiiy"]
+size = Vector2(21, 25)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eld7l"]
 atlas = ExtResource("1_ij0yv")
@@ -15,7 +15,8 @@ lock_rotation = true
 linear_damp = 5.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_4meto")
+position = Vector2(1.5, 0.5)
+shape = SubResource("RectangleShape2D_lmiiy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_eld7l")

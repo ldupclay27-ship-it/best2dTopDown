@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://eukjdut6qhv0"]
+
+[ext_resource type="PackedScene" uid="uid://dx02d62eaiykr" path="res://Blocks/block.tscn" id="1_yfg4i"]
+[ext_resource type="Texture2D" uid="uid://mfmtysqn00hb" path="res://Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetElement.png" id="2_rhvsk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_04fle"]
+size = Vector2(12, 14)
+
+[node name="InsideBlock" instance=ExtResource("1_yfg4i")]
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2(0, 0)
+shape = SubResource("RectangleShape2D_04fle")
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("2_rhvsk")
+region_enabled = true
+region_rect = Rect2(31.3208, 32.229, 17.0381, 16.6614)

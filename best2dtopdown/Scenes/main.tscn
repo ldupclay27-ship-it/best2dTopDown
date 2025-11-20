@@ -2040,16 +2040,16 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_loj8o")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d4bjd"]
-size = Vector2(319, 17)
+size = Vector2(374, 17)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1gf61"]
 size = Vector2(314, 17)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1l48i"]
-size = Vector2(31, 222)
+size = Vector2(31, 261)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r20u5"]
-size = Vector2(31, 224.25)
+size = Vector2(31, 252)
 
 [node name="main" type="Node2D"]
 y_sort_enabled = true
@@ -2084,7 +2084,7 @@ tile_set = SubResource("TileSet_xlx6p")
 
 [node name="Block" parent="." instance=ExtResource("5_jd6vi")]
 z_index = 1
-position = Vector2(141, 562)
+position = Vector2(77, 546)
 collision_layer = 4
 collision_mask = 10
 
@@ -2108,13 +2108,14 @@ player_location = Vector2(1, 89)
 position = Vector2(180, 155)
 
 [node name="PuzzleButton" parent="." instance=ExtResource("8_eaxkc")]
-position = Vector2(197, 583)
+position = Vector2(54, 608)
 collision_layer = 4
 collision_mask = 6
 
 [node name="PortalDoor" parent="." instance=ExtResource("9_4jncy")]
 position = Vector2(196, 515)
 collision_mask = 2
+button_presses_needed = 2
 
 [node name="BlockStopper" type="StaticBody2D" parent="."]
 position = Vector2(163, 421)
@@ -2122,7 +2123,7 @@ collision_layer = 8
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BlockStopper"]
-position = Vector2(2.5, 27)
+position = Vector2(2, -19)
 shape = SubResource("RectangleShape2D_d4bjd")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="BlockStopper"]
@@ -2130,12 +2131,25 @@ position = Vector2(3, 230)
 shape = SubResource("RectangleShape2D_1gf61")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="BlockStopper"]
-position = Vector2(-169, 133)
+position = Vector2(-169, 113.5)
 shape = SubResource("RectangleShape2D_1l48i")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="BlockStopper"]
-position = Vector2(164, 126.875)
+position = Vector2(164, 113)
 shape = SubResource("RectangleShape2D_r20u5")
+
+[node name="Block2" parent="." instance=ExtResource("5_jd6vi")]
+z_index = 1
+position = Vector2(291, 477)
+collision_layer = 4
+collision_mask = 10
+
+[node name="PuzzleButton2" parent="." instance=ExtResource("8_eaxkc")]
+position = Vector2(272, 624)
+collision_layer = 4
+collision_mask = 6
 
 [connection signal="pressed" from="PuzzleButton" to="PortalDoor" method="_on_puzzle_button_pressed"]
 [connection signal="unpressed" from="PuzzleButton" to="PortalDoor" method="_on_puzzle_button_unpressed"]
+[connection signal="pressed" from="PuzzleButton2" to="PortalDoor" method="_on_puzzle_button_pressed"]
+[connection signal="unpressed" from="PuzzleButton2" to="PortalDoor" method="_on_puzzle_button_unpressed"]
