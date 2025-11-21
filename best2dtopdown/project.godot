@@ -23,6 +23,7 @@ SceneManager="*res://Scripts/sceneManager.gd"
 
 folder_colors={
 "res://Blocks/": "red",
+"res://Enimies/": "blue",
 "res://Ninja Adventure - Asset Pack/": "green",
 "res://Scenes/": "yellow",
 "res://Scripts/": "purple"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://w84yaseyus5a"]
+[gd_scene load_steps=23 format=4 uid="uid://w84yaseyus5a"]
 
 [ext_resource type="Texture2D" uid="uid://b6jm8laltqdux" path="res://Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetFloor.png" id="1_ye2k2"]
 [ext_resource type="Texture2D" uid="uid://cp77d844m3uep" path="res://Ninja Adventure - Asset Pack/Backgrounds/Tilesets/TilesetWater.png" id="2_eafcu"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bmdynjgrjuy2g" path="res://Scenes/portal.tscn" id="6_5xr4x"]
 [ext_resource type="PackedScene" uid="uid://c0707hi0uc5s8" path="res://puzzle_button.tscn" id="8_eaxkc"]
 [ext_resource type="PackedScene" uid="uid://d17ufew3xks65" path="res://portal_door.tscn" id="9_4jncy"]
+[ext_resource type="PackedScene" uid="uid://bipp6sp4jobb3" path="res://Enimies/slime.tscn" id="10_kejs3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mwtg0"]
 texture = ExtResource("1_ye2k2")
@@ -2084,7 +2085,7 @@ tile_set = SubResource("TileSet_xlx6p")
 
 [node name="Block" parent="." instance=ExtResource("5_jd6vi")]
 z_index = 1
-position = Vector2(77, 546)
+position = Vector2(75, 552)
 collision_layer = 4
 collision_mask = 10
 
@@ -2148,6 +2149,9 @@ collision_mask = 10
 position = Vector2(272, 624)
 collision_layer = 4
 collision_mask = 6
+
+[node name="Slime" parent="." instance=ExtResource("10_kejs3")]
+position = Vector2(718, -7)
 
 [connection signal="pressed" from="PuzzleButton" to="PortalDoor" method="_on_puzzle_button_pressed"]
 [connection signal="unpressed" from="PuzzleButton" to="PortalDoor" method="_on_puzzle_button_unpressed"]

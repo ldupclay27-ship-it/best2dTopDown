@@ -35,3 +35,14 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 	
+
+
+func _on_hit_box_body_entered(body: Node2D) -> void:
+	SceneManager.player_hp -= 1
+	print(SceneManager.player_hp)
+	#die function 
+	if SceneManager.player_hp <= 0:
+		die()
+
+func die():
+	get_tree().call_deferred("reload_current_scene")
