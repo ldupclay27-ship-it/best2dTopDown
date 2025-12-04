@@ -69,7 +69,9 @@ func die():
 
 
 func _on_weapon_area_body_entered(body: Node2D) -> void:
-	body.queue_free()
+	body.hp -= 1
+	if body.hp <= 0:
+		body.queue_free()
 	
 
 

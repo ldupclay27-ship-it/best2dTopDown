@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @export var speed: float = 20
-
+@export var hp: int = 3
 var target: Node2D
 
 
