@@ -3,13 +3,22 @@ class_name Player
 
 @export var move_speed: float = 100.0
 @export var push_strength: float = 140.0
+@export var acceleration: float = 10
 
 func _ready() -> void :
 	position = SceneManager.player_spawn_position
+	$Weapon.visible = false
+	%Weapon_area.monitoring = false
+
+
+func _process(delta: float):
+	if Input.is_action_just_pressed("interact "):
+		attack()
 
 func _physics_process(delta: float) -> void:
 	var move_vector: Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	velocity = move_vector * move_speed
+	#velocity = move_vector * move_speed
+	velocity = velocity.move_toward(move_vector * move_speed, acceleration)
 	
 	if velocity.x > 0:
 		$AnimatedSprite2D.play("walk_right")
@@ -35,7 +44,11 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 	
-
+func attack():
+	# show weapon hide weapon turn collision on and off
+	$Weapon.visible = true
+	%Weapon_area.monitoring = true
+	$Weapon_Timer.start()
 
 func _on_hit_box_body_entered(body: Node2D) -> void:
 	SceneManager.player_hp -= 1
@@ -43,6 +56,23 @@ func _on_hit_box_body_entered(body: Node2D) -> void:
 	#die function 
 	if SceneManager.player_hp <= 0:
 		die()
+	
+	var distance_to_player: Vector2
+	distance_to_player = global_position - body.global_position
+	var knockback_direction: Vector2 = distance_to_player.normalized()
+	var knockback_strength: float = 200
+	velocity += knockback_direction * knockback_strength
 
 func die():
+	SceneManager.player_hp = 3
 	get_tree().call_deferred("reload_current_scene")
+
+
+func _on_weapon_area_body_entered(body: Node2D) -> void:
+	body.queue_free()
+	
+
+
+func _on_weapon_timer_timeout() -> void:
+	$Weapon.visible = false
+	%Weapon_area.monitoring = false

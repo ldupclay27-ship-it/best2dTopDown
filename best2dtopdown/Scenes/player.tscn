@@ -1,6 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://cohhxm4l67hth"]
+[gd_scene load_steps=24 format=3 uid="uid://cohhxm4l67hth"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_do2i0"]
+[ext_resource type="Texture2D" uid="uid://ct6p8aanogk1p" path="res://Ninja Adventure - Asset Pack/Items/Weapons/Rapier/Sprite.png" id="3_alfsy"]
 [ext_resource type="Texture2D" uid="uid://caq5o8ql5ngpi" path="res://Ninja Adventure - Asset Pack/Actor/Characters/Spirit/SpriteSheet.png" id="3_wqw4o"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3dylj"]
@@ -143,7 +144,10 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ckweq"]
-radius = 4.0
+radius = 6.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v7l5o"]
+size = Vector2(10, 16)
 
 [node name="player" type="CharacterBody2D" groups=["movable"]]
 script = ExtResource("1_do2i0")
@@ -164,4 +168,22 @@ collision_mask = 16
 shape = SubResource("CircleShape2D_ckweq")
 debug_color = Color(0.972803, 0.125319, 0.276832, 0.42)
 
+[node name="Weapon" type="Sprite2D" parent="."]
+position = Vector2(12, -19)
+texture = ExtResource("3_alfsy")
+
+[node name="Weapon_area" type="Area2D" parent="Weapon"]
+unique_name_in_owner = true
+collision_layer = 2
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Weapon/Weapon_area"]
+shape = SubResource("RectangleShape2D_v7l5o")
+
+[node name="Weapon_Timer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
 [connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]
+[connection signal="body_entered" from="Weapon/Weapon_area" to="." method="_on_weapon_area_body_entered"]
+[connection signal="timeout" from="Weapon_Timer" to="." method="_on_weapon_timer_timeout"]
