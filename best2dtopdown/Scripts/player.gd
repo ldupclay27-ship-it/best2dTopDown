@@ -5,6 +5,8 @@ class_name Player
 @export var push_strength: float = 140.0
 @export var acceleration: float = 10
 
+var is_attacking: bool = false
+
 func _ready() -> void :
 	position = SceneManager.player_spawn_position
 	$Weapon.visible = false
@@ -16,21 +18,31 @@ func _process(delta: float):
 		attack()
 
 func _physics_process(delta: float) -> void:
+	if not is_attacking: 
+		move_player()
+	push_blocks()
+	move_and_slide()
+func move_player():
 	var move_vector: Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	#velocity = move_vector * move_speed
 	velocity = velocity.move_toward(move_vector * move_speed, acceleration)
 	
 	if velocity.x > 0:
 		$AnimatedSprite2D.play("walk_right")
+		$AnimationPlayer.play("swing_right")
 	elif velocity.x < 0:
 		$AnimatedSprite2D.play("walk_left")
+		$AnimationPlayer.play("swing_left")
 	elif velocity.y > 0:
 		$AnimatedSprite2D.play("walk_down")
+		$AnimationPlayer.play("swing_down")
 	elif velocity.y < 0:
 		$AnimatedSprite2D.play("walk_up")
+		$AnimationPlayer.play("swing_up")
 	else:
 		$AnimatedSprite2D.stop()
 	
+func push_blocks():
 	var collision: KinematicCollision2D = get_last_slide_collision()
 	if collision: 
 		#get colliding node
@@ -45,10 +57,24 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 func attack():
+	is_attacking = true
+	velocity = Vector2.ZERO
 	# show weapon hide weapon turn collision on and off
 	$Weapon.visible = true
 	%Weapon_area.monitoring = true
 	$Weapon_Timer.start()
+	
+	var player_animation: String = $AnimatedSprite2D.animation
+	if player_animation == "walk_right":
+		$AnimatedSprite2D.play("attack_right")
+	elif player_animation == "walk_left":
+		$AnimatedSprite2D.play("attack_left")
+	elif player_animation == "walk_up":
+		$AnimatedSprite2D.play("attack_up")
+	elif player_animation == "walk_down":
+		$AnimatedSprite2D.play("attack_down")
+
+
 
 func _on_hit_box_body_entered(body: Node2D) -> void:
 	SceneManager.player_hp -= 1
@@ -78,3 +104,13 @@ func _on_weapon_area_body_entered(body: Node2D) -> void:
 func _on_weapon_timer_timeout() -> void:
 	$Weapon.visible = false
 	%Weapon_area.monitoring = false
+	var player_animation: String = $AnimatedSprite2D.animation
+	if player_animation == "attack_right":
+		$AnimatedSprite2D.play("walk_right")
+	elif player_animation == "attack_left":
+		$AnimatedSprite2D.play("walk_left")
+	elif player_animation == "attack_up":
+		$AnimatedSprite2D.play("walk_up")
+	elif player_animation == "attack_down":
+		$AnimatedSprite2D.play("walk_down")
+	is_attacking = false
